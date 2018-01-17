@@ -1,4 +1,5 @@
 require_relative "menu"
+require_relative "send_text"
 
 class Takeaway
 
@@ -11,7 +12,7 @@ class Takeaway
   end
 
   def show_menu
-    menu.items.each{ |i, p| puts"#{i.capitalize}.to_s - £#{p.to_s}" }
+    menu.items.each{ |i, p| puts "#{i.capitalize}.to_s - £#{p.to_s}" }
   end
 
   def add_order(name, quantity= 1)
@@ -31,4 +32,13 @@ class Takeaway
   def order_complete
     "Thank you! Your order was placed and will be delivered before 18:52."
   end
+  def send_notification(text)
+    Text.new.send_text(text)
+  end
+
+  def eta
+    time = (Time.now) + 3600
+    time.strftime("%H:%M")
+  end
+end
 end
